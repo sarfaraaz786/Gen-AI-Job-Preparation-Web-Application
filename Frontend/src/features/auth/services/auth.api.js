@@ -2,7 +2,7 @@ import axios from "axios"
 
 
 const api = axios.create({
-    baseURL: process.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true
 })
 
@@ -16,9 +16,8 @@ export async function register({ username, email, password }) {
         return response.data
 
     } catch (err) {
-
-        console.log(err)
-
+        console.error(err.response?.data || err.message);
+        throw err;
     }
 
 }
