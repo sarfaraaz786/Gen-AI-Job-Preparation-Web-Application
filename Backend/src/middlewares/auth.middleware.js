@@ -8,6 +8,7 @@ async function authUser(req, res, next) {
     const token = req.cookies.token
 
     if (!token) {
+        console.log(req.cookies);
         return res.status(401).json({
             message: "Token not provided."
         })
