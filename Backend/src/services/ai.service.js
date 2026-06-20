@@ -116,12 +116,10 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
         const pdfBuffer = await generatePdfFromHtml(jsonContent.html)
 
         return pdfBuffer
-    } catch(err) {
-        
-        return res.status(400).json({
-            message: "Ai Not Responding due to Traffic Please Try Again"
-        })
-    }
+    } catch (err) {
+      console.error("Gemini Error:", err);
+      throw new Error("Gemini Response Error Please Try Again");
+  }
 
 }
 
