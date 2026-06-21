@@ -85,7 +85,6 @@ async function generatePdfFromHtml(htmlContent) {
   });
 
   await browser.close();
-
   return pdfBuffer;
 }
 
