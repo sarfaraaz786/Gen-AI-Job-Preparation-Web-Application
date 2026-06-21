@@ -13,7 +13,7 @@ const NAV_ITEMS = [
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 const QuestionCard = ({ item, index }) => {
-    const [ open, setOpen ] = useState(false)
+    const [open, setOpen] = useState(false)
     return (
         <div className='q-card'>
             <div className='q-card__header' onClick={() => setOpen(o => !o)}>
@@ -40,7 +40,7 @@ const QuestionCard = ({ item, index }) => {
 }
 
 const RoadMapDay = ({ day }) => (
-    <div className='roadmap-day'> 
+    <div className='roadmap-day'>
         <div className='roadmap-day__header'>
             <span className='roadmap-day__badge'>Day {day.day}</span>
             <h3 className='roadmap-day__focus'>{day.focus}</h3>
@@ -58,19 +58,19 @@ const RoadMapDay = ({ day }) => (
 
 // ── Main Component ────────────────────────────────────────────────────────────
 const Interview = () => {
-    const [ activeNav, setActiveNav ] = useState('technical')
+    const [activeNav, setActiveNav] = useState('technical')
     const { report, getReportById, loading, getResumePdf } = useInterview()
     const { interviewId } = useParams()
 
     // Logout feature
-    const {handleLogout} = useAuth();
+    const { handleLogout } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (interviewId) {
             getReportById(interviewId)
         }
-    }, [ interviewId ])
+    }, [interviewId])
 
 
 
@@ -86,12 +86,12 @@ const Interview = () => {
         report.matchScore >= 80 ? 'score--high' :
             report.matchScore >= 60 ? 'score--mid' : 'score--low'
 
-    
+
     // LOGOUT CALL       
     const logout = async () => {
         await handleLogout();
         navigate("/login");
-    }        
+    }
 
     return (
         <div className='interview-page'>
@@ -172,30 +172,32 @@ const Interview = () => {
                 {/* ── Right Sidebar ── */}
                 <aside className='interview-sidebar'>
 
-                    {/* Match Score */}
-                    <div className='match-score'>
-                        <p className='match-score__label'>Match Score</p>
-                        <div className={`match-score__ring ${scoreColor}`}>
-                            <span className='match-score__value'>{report.matchScore}</span>
-                            <span className='match-score__pct'>%</span>
+                    <div>
+                        {/* Match Score */}
+                        <div className='match-score'>
+                            <p className='match-score__label'>Match Score</p>
+                            <div className={`match-score__ring ${scoreColor}`}>
+                                <span className='match-score__value'>{report.matchScore}</span>
+                                <span className='match-score__pct'>%</span>
+                            </div>
+                            <p className='match-score__sub'>Strong match for this role</p>
                         </div>
-                        <p className='match-score__sub'>Strong match for this role</p>
-                    </div>
 
-                    <div className='sidebar-divider' />
+                        <div className='sidebar-divider' />
 
-                    {/* Skill Gaps */}
-                    <div className='skill-gaps'>
-                        <p className='skill-gaps__label'>Skill Gaps</p>
-                        <div className='skill-gaps__list'>
-                            {report.skillGaps.map((gap, i) => (
-                                <span key={i} className={`skill-tag skill-tag--${gap.severity}`}>
-                                    {gap.skill}
-                                </span>
-                            ))}
+                        {/* Skill Gaps */}
+                        <div className='skill-gaps'>
+                            <p className='skill-gaps__label'>Skill Gaps</p>
+                            <div className='skill-gaps__list'>
+                                {report.skillGaps.map((gap, i) => (
+                                    <span key={i} className={`skill-tag skill-tag--${gap.severity}`}>
+                                        {gap.skill}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                    <button className='button primary-button logout' onClick={() => {logout()}}>Logout</button>
+                    <button className='button primary-button logout' onClick={() => { logout() }}>Logout</button>
 
                 </aside>
             </div>
