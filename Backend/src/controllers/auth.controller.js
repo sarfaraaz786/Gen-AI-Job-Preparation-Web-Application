@@ -42,6 +42,7 @@ async function registerUserController(req, res) {
         { expiresIn: "1d" }
     )
 
+    console.log("Setting cookie...");
     res.cookie("token", token, {
         httpOnly: true,
         secure: true,
@@ -94,6 +95,7 @@ async function loginUserController(req, res) {
         { expiresIn: "1d" }
     )
 
+    console.log("Setting cookie...");
     res.cookie("token", token, {
         httpOnly: true,
         secure: true,
