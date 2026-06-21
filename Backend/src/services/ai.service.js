@@ -120,9 +120,9 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
 
         return pdfBuffer
     } catch (err) {
-      console.error("Gemini Error:", err);
-      throw new Error("Gemini Response Error Please Try Again");
-  }
+        console.error("Resume PDF Error:", err);
+        throw err;
+    }
 
 }
 
